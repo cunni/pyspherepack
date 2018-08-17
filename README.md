@@ -1,6 +1,4 @@
-# pyspherepack [![Test status](https://travis-ci.org/cunni/pyspherepack.svg?branch=master)](https://travis-ci.org/cunni/pyspherepack) [![asv](http://img.shields.io/badge/benchmarked%20by-asv-green.svg?style=flat)](#)
-
-https://travis-ci.org/cunni/pyspherepack
+# pyspherepack [![Test status](https://travis-ci.org/cunni/pyspherepack.svg?branch=master)](https://travis-ci.org/cunni/pyspherepack) 
 
 pyspherepack offers a quick and dirty algorithm for doing sphere packing with autograd.
 
