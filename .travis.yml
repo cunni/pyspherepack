@@ -1,0 +1,13 @@
+sudo: false
+notifications:
+  email: false
+language: python
+python: 
+  - "2.7"
+  - "3.6"
+env:
+  - DEPS="pip pytest autograd matplotlib"
+install: 
+  - pip install -v .
+script:
+  - pytest
