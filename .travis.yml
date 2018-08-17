@@ -6,7 +6,7 @@ python:
   - "2.7"
   - "3.6"
 env:
-  - DEPS="pip pytest autograd matplotlib"
+  - DEPS="pip pytest numpy autograd matplotlib"
 install: 
   - pip install -v .
 script:
