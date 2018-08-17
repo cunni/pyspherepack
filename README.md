@@ -30,8 +30,9 @@ for example:
 
 Some current issues:
     
-    * deal properly with the fact that we don't enforce the box, so the radii aren't really correct
-    * add a shuffle_repeat method that keeps self.x_best and so on.
-    * add comparison to hexagonal and square and known best
-    * set up travis     
-    * sloppy: the way it adds the radius doesn't allow precise box aspect to be specified, only can be specified up to the edge + 2 rad, whatever that rad will be.
+* deal properly with the fact that we don't enforce the box, so the radii aren't really correct
+* add a shuffle_repeat method that keeps self.x_best and so on.
+* make self.x clearly an unconstrained map from the box to the reals (needlessly confusing now)
+* add comparison to hexagonal and square and known best
+* set up travis     
+* sloppy: the way it adds the radius doesn't allow precise box aspect to be specified, only can be specified up to the edge + 2 rad, whatever that rad will be.
