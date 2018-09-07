@@ -100,9 +100,9 @@ class Box(object):
             ax.text(scaled_box[0], scaled_box[1], '({:04.2f},{:04.2f})'.format(scaled_box[0],scaled_box[1]),horizontalalignment='right',verticalalignment='bottom')
             if clamp_edge > 0:
                 ax.add_artist(plt.scatter(-clamp_edge,0.0,color='k'))
-                ax.text(-clamp_edge, 0.0, '-{:03.1f}'.format(clamp_edge),horizontalalignment='left',verticalalignment='top')
+                ax.text(-clamp_edge, 0.0, '-{:03.1f}'.format(clamp_edge),horizontalalignment='right',verticalalignment='top')
                 ax.add_artist(plt.scatter(scaled_box[0]+clamp_edge,0.0,color='k'))
-                ax.text(scaled_box[0]+clamp_edge, 0.0, '+{:03.1f}'.format(clamp_edge),horizontalalignment='right',verticalalignment='top')
+                ax.text(scaled_box[0]+clamp_edge, 0.0, '+{:03.1f}'.format(clamp_edge),horizontalalignment='left',verticalalignment='top')
             plt.show() 
 
 class ManyBox(object):
