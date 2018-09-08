@@ -136,11 +136,11 @@ class ManyBox(object):
     def load(cls,filename=None):
         # https://stackoverflow.com/questions/2709800/how-to-pickle-yourself
         filename = filename if filename is not None else 'data/manybox.pkl'
-        try: 
-            with open(filename,'rb') as f:
-                return pickle.load(f)
-        except:
-            raise IOError('unable to load file: {}'.format(filename))
+        #try: 
+        with open(filename,'rb') as f:
+            return pickle.load(f)
+        #except:
+        #    raise IOError('unable to load file: {}'.format(filename))
 
     @classmethod
     def tex_best(cls,filenames=None,texname=None,scaled_rad=None,clamp_edge=None):
