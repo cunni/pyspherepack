@@ -144,8 +144,8 @@ class ManyBox(object):
 
     @classmethod
     def tex_best(cls,filenames=None,texname=None,scaled_rad=None,clamp_edge=None):
-        filenames = filenames if filenames is not None else ['data/mb_50_2x1.pkl','data/mb_50_3x1.pkl']
-        texname = texname if texname is not None else 'data/aggregated_results' 
+        filenames = filenames if filenames is not None else ['../data/mb_50_2x1.pkl','../data/mb_50_3x1.pkl']
+        texname = texname if texname is not None else '../data/aggregated_results' 
         # set up pylatex doc
         geometry_options = {"margin": "1in"}
         doc = pylatex.Document(texname, geometry_options=geometry_options)
