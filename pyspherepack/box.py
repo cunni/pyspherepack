@@ -1,6 +1,7 @@
 import autograd.numpy as np 
 from autograd import grad
 from autograd.misc.optimizers import adam
+import matplotlib
 from matplotlib import pyplot as plt
 from matplotlib import interactive
 interactive(True)
@@ -8,6 +9,7 @@ interactive(True)
 import matplotlib.patches as patches
 from .utils import np_printoptions       
 import pickle
+import pylatex
 
 class Box(object):
     """a fairly simple class, with some non-oop goofiness to play nicely with autograd grad and their adam"""
@@ -139,6 +141,49 @@ class ManyBox(object):
                 return pickle.load(f)
         except:
             raise IOError('unable to load')
+
+    @classmethod
+    def tex_best(cls,filenames=None,texname=None,scaled_rad=None,clamp_edge=None):
+        filenames = filenames if filenames is not None else ['data/mb_50_2x1.pkl','data/mb_50_3x1.pkl']
+        texname = texname if texname is not None else 'data/aggregated_results' 
+        # set up pylatex doc
+        geometry_options = {"margin": "1in"}
+        doc = pylatex.Document(texname, geometry_options=geometry_options)
+        dapne = lambda s: doc.append(pylatex.NoEscape(s))
+        with doc.create(pylatex.Section('Introduction')):
+            doc.append('Each section that follows shows an optimized layout for a given number of circles and an approximate aspect ratio of the sheet. Throughout, the following parameters are assumed: clamp edge of 10.0mm, circle diameter of 20mm, spacing between circles of 0.50mm.')
+        for fn in filenames:
+            mb = cls.load(filename=fn)
+            b = mb.best_box['box']
+            b.plot(clamp_edge=clamp_edge,scaled_rad=scaled_rad)
+            # pylatex to put this in tex
+            #matplotlib.use('Agg')
+            with doc.create(pylatex.Section(pylatex.NoEscape(r'{} circles, box aspect ratio of roughly ${}\times{}$'.format(b.n_balls,b.box[0],b.box[1])),label=fn)):
+                with doc.create(pylatex.Figure(position='htbp')) as plot:
+                    plot.add_plot(width=pylatex.NoEscape(r'0.8\textwidth'))
+                    #plot.add_caption('Optimized circle packing for this sheet size.')
+
+            x = b.box_warp(b.logits)
+            rad = b.ball_radius(x)
+            clamp_edge = clamp_edge if clamp_edge is not None else 0.0
+            scaled_rad = scaled_rad if scaled_rad is not None else rad
+            scaled_box = scaled_rad/rad*(b.box+2*rad)
+            scaled_x = scaled_rad/rad*(x + rad)
+            #doc.append(pylatex.NoEscape('\noindent Density %:'))
+            dapne(r'\noindent Density \%: {:04.2f}\% \\'.format(b.density()))
+            #matplotlib.use('Agg')
+            dapne(r'Waste \%: {:04.2f}\% \\'.format(100-b.density()))
+            dapne(r'Density with clamp edge \%: {:04.2f}\% \\'.format((b.density()*np.prod(scaled_box)/(scaled_box[1]*(scaled_box[0]+2*clamp_edge)))))
+            dapne(r'Waste with clamp edge \%: {:04.2f}\% \\'.format(100-(b.density()*np.prod(scaled_box)/(scaled_box[1]*(scaled_box[0]+2*clamp_edge)))))
+            
+            dapne(r'Circle center coordinates: \\')
+            for i in range(b.n_balls):
+                #dapne(r'$c_{{{}}}$: {}\\'.format(i+1,scaled_x[i,:]))
+                dapne(r'$[{}~~{}]$ \\'.format(scaled_x[i,0],scaled_x[i,1]))
+            dapne(r'\clearpage') 
+
+        doc.generate_tex()
+
 
 
 
