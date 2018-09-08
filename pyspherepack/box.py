@@ -140,7 +140,7 @@ class ManyBox(object):
             with open(filename,'rb') as f:
                 return pickle.load(f)
         except:
-            raise IOError('unable to load')
+            raise IOError('unable to load file: {}'.format(filename))
 
     @classmethod
     def tex_best(cls,filenames=None,texname=None,scaled_rad=None,clamp_edge=None):
