@@ -7,6 +7,7 @@ from matplotlib import interactive
 interactive(True)
 #import pylab
 import matplotlib.patches as patches
+matplotlib.use('Agg')
 from .utils import np_printoptions       
 import pickle
 import pylatex
@@ -171,7 +172,6 @@ class ManyBox(object):
             scaled_x = scaled_rad/rad*(x + rad)
             #doc.append(pylatex.NoEscape('\noindent Density %:'))
             dapne(r'\noindent Density \%: {:04.2f}\% \\'.format(b.density()))
-            #matplotlib.use('Agg')
             dapne(r'Waste \%: {:04.2f}\% \\'.format(100-b.density()))
             dapne(r'Density with clamp edge \%: {:04.2f}\% \\'.format((b.density()*np.prod(scaled_box)/(scaled_box[1]*(scaled_box[0]+2*clamp_edge)))))
             dapne(r'Waste with clamp edge \%: {:04.2f}\% \\'.format(100-(b.density()*np.prod(scaled_box)/(scaled_box[1]*(scaled_box[0]+2*clamp_edge)))))
