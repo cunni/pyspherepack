@@ -2,12 +2,12 @@ import autograd.numpy as np
 from autograd import grad
 from autograd.misc.optimizers import adam
 import matplotlib
+matplotlib.use('Agg')
 from matplotlib import pyplot as plt
 from matplotlib import interactive
 interactive(True)
 #import pylab
 import matplotlib.patches as patches
-matplotlib.use('Agg')
 from .utils import np_printoptions       
 import pickle
 import pylatex
