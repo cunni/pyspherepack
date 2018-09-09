@@ -2,7 +2,7 @@ import autograd.numpy as np
 from autograd import grad
 from autograd.misc.optimizers import adam
 import matplotlib
-matplotlib.use('Agg')
+matplotlib.use('Agg') # http://www.davidketcheson.info/2015/01/13/using_matplotlib_image_comparison.html
 from matplotlib import pyplot as plt
 from matplotlib import interactive
 interactive(True)
